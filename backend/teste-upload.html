@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste de Upload - CIn DataBase</title>
+</head>
+<body>
+    <h2>Enviar Material (Prova/Lista)</h2>
+    <form action="http://localhost:3000/materials/upload" method="POST" enctype="multipart/form-data">
+        
+        <label>ID da Disciplina:</label><br>
+        <input type="text" name="disciplineId" value="1"><br><br>
+
+        <label>Tipo (PROVA ou LISTA):</label><br>
+        <input type="text" name="type" value="PROVA"><br><br>
+
+        <label>Arquivo:</label><br>
+        <input type="file" name="file" required><br><br>
+
+        <button type="submit">Fazer Upload</button>
+    </form>
+</body>
+</html>
