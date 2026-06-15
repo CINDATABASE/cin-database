@@ -4,21 +4,18 @@ import { Document } from 'mongoose';
 export type DisciplineDocument = Discipline & Document;
 
 @Schema({ timestamps: true })
+@Schema({ collection: 'disciplines' })
 export class Discipline {
   @Prop({ required: true })
   name: string;
 
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true })
   code: string;
 
   @Prop({ required: true })
-  period: number;
-
-  @Prop({ required: true })
   professor: string;
-
-  @Prop({ required: true })
-  description: string;
 }
 
 export const DisciplineSchema = SchemaFactory.createForClass(Discipline);
+
+DisciplineSchema.index({ name: 1, professor: 1 }, { unique: true });

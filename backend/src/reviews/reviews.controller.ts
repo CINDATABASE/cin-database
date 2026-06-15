@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ReviewsService } from './reviews.service';
 import { CreateReviewDto } from './dto/create-review.dto';
@@ -21,14 +22,15 @@ export class ReviewsController {
   }
 
   @Get()
-  findAll() {
-    return this.reviewsService.findAll();
+  findAll(@Query('disciplineId') disciplineId?: string) {
+    // 💡 Pegando o ID via Query string
+    return this.reviewsService.findAll(disciplineId);
   }
 
-  @Get('material/:materialId')
-  findByMaterial(@Param('materialId') materialId: string) {
-    return this.reviewsService.findByMaterial(materialId);
-  }
+  // @Get('material/:materialId')
+  // findByMaterial(@Param('materialId') materialId: string) {
+  //   return this.reviewsService.findByMaterial(materialId);
+  // }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
