@@ -1,4 +1,10 @@
-import { IsMongoId, IsNotEmpty, IsString, IsIn } from 'class-validator';
+import {
+  IsMongoId,
+  IsNotEmpty,
+  IsString,
+  IsIn,
+  IsOptional,
+} from 'class-validator';
 
 export class CreateMaterialDto {
   @IsString()
@@ -16,8 +22,14 @@ export class CreateMaterialDto {
     message: 'O material precisa estar atrelado a uma disciplina.',
   })
   disciplineId: string;
+  @IsString()
+  @IsOptional()
+  disciplineName?: string;
 
-  // 💡 ADICIONE ESTE CAMPO: Valida se o que veio do front é um dos três tipos permitidos
+  @IsString()
+  @IsOptional()
+  professor?: string;
+
   @IsString()
   @IsNotEmpty({ message: 'O tipo do material é obrigatório.' })
   @IsIn(['VIDEO', 'PROVA', 'LISTA', 'video', 'prova', 'lista'], {

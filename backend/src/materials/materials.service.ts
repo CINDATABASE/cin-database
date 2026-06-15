@@ -14,7 +14,14 @@ export class MaterialsService {
     file: Express.Multer.File,
     createMaterialDto: CreateMaterialDto,
   ): Promise<Material> {
-    const { disciplineId, type } = createMaterialDto;
+    const {
+      title,
+      description,
+      disciplineId,
+      disciplineName,
+      professor,
+      type,
+    } = createMaterialDto;
 
     const normalizedType = type.toUpperCase();
     if (!['VIDEO', 'PROVA', 'LISTA'].includes(normalizedType)) {
@@ -22,14 +29,22 @@ export class MaterialsService {
     }
 
     const newMaterial = new this.materialModel({
+      title,
+      description,
       disciplineId,
+      disciplineName,
+      professor,
       type: normalizedType,
       filename: file.filename,
       path: file.path,
       isApproved: false,
     });
 
-    return newMaterial.save();
+    return await newMaterial.save();
+  }
+
+  async findPending(): Promise<Material[]> {
+    return this.materialModel.find({ isApproved: false }).exec();
   }
 
   async findAll(disciplineId?: string): Promise<Material[]> {
@@ -49,5 +64,17 @@ export class MaterialsService {
     }
 
     return updatedMaterial;
+  }
+
+  async findById(id: string): Promise<Material> {
+    const material = await this.materialModel.findById(id).exec();
+
+    if (!material) {
+      throw new BadRequestException(
+        'O arquivo solicitado não foi encontrado no servidor.',
+      );
+    }
+
+    return material;
   }
 }

@@ -6,7 +6,19 @@ export type MaterialDocument = Material & Document;
 @Schema({ timestamps: true })
 export class Material {
   @Prop({ required: true })
+  title: string;
+
+  @Prop({ required: true })
+  description: string;
+
+  @Prop({ required: true })
   disciplineId: string;
+
+  @Prop({ required: true })
+  disciplineName: string;
+
+  @Prop({ required: true })
+  professor: string;
 
   @Prop({ required: true, enum: ['VIDEO', 'PROVA', 'LISTA'] })
   type: string;

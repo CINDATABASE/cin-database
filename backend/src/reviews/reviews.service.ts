@@ -12,20 +12,18 @@ export class ReviewsService {
   ) {}
 
   async create(createReviewDto: CreateReviewDto): Promise<Review> {
-    if (createReviewDto.rating < 1 || createReviewDto.rating > 5) {
-      throw new BadRequestException('A nota deve estar entre 1 e 5.');
-    }
-
     const newReview = new this.reviewModel(createReviewDto);
-    return newReview.save();
+    return await newReview.save();
   }
 
-  async findAll(): Promise<Review[]> {
-    return this.reviewModel.find().exec();
-  }
-
-  async findByMaterial(materialId: string): Promise<Review[]> {
-    return this.reviewModel.find({ materialId }).exec();
+  async findAll(disciplineId?: string): Promise<Review[]> {
+    if (disciplineId) {
+      return this.reviewModel
+        .find({ disciplineId })
+        .sort({ createdAt: -1 })
+        .exec();
+    }
+    return this.reviewModel.find().sort({ createdAt: -1 }).exec();
   }
 
   async findOne(id: string): Promise<Review | null> {
@@ -36,17 +34,10 @@ export class ReviewsService {
     id: string,
     updateReviewDto: UpdateReviewDto,
   ): Promise<Review | null> {
-    if (updateReviewDto.rating !== undefined) {
-      if (updateReviewDto.rating < 1 || updateReviewDto.rating > 5) {
-        throw new BadRequestException(
-          'A nota atualizada deve estar entre 1 e 5.',
-        );
-      }
-    }
-
     const updatedReview = await this.reviewModel
       .findByIdAndUpdate(id, { $set: updateReviewDto }, { new: true })
       .exec();
+
     if (!updatedReview) {
       throw new BadRequestException(
         'Avaliação não encontrada para atualização.',
