@@ -4,7 +4,8 @@ import request from 'supertest';
 import { App } from 'supertest/types';
 import { AppModule } from '../src/app.module';
 import { MongoMemoryServer } from 'mongodb-memory-server';
-import { MongooseModule } from '@nestjs/mongoose';
+import { MongooseModule, getConnectionToken } from '@nestjs/mongoose';
+import { Connection } from 'mongoose';
 
 describe('CIn DataBase - MVP Integration Tests (e2e)', () => {
   let app: INestApplication<App>;
@@ -50,6 +51,13 @@ describe('CIn DataBase - MVP Integration Tests (e2e)', () => {
   });
 
   afterAll(async () => {
+    // Fecha a conexão com o mongoose para não reter processos abertos no Jest
+    try {
+      const connection = app.get<Connection>(getConnectionToken());
+      await connection.close();
+    } catch (err) {
+      console.log('Erro ao fechar conexão com o banco:', err);
+    }
     await app.close();
     await mongoServer.stop();
   });
@@ -62,7 +70,7 @@ describe('CIn DataBase - MVP Integration Tests (e2e)', () => {
       const invalidUser = { ...mockUser, email: 'aluno@gmail.com' };
 
       const response = await request(app.getHttpServer())
-        .post('/users')
+        .post('/users/register') // 💡 Corrigido com /register
         .send(invalidUser)
         .expect(HttpStatus.BAD_REQUEST);
 
@@ -74,7 +82,7 @@ describe('CIn DataBase - MVP Integration Tests (e2e)', () => {
 
     it('Deve cadastrar com sucesso um usuário institucional válido e criptografar a senha', async () => {
       const response = await request(app.getHttpServer())
-        .post('/users')
+        .post('/users/register') // 💡 Corrigido com /register
         .send(mockUser)
         .expect(HttpStatus.CREATED);
 
@@ -86,7 +94,7 @@ describe('CIn DataBase - MVP Integration Tests (e2e)', () => {
 
     it('Deve barrar tentativa de cadastro com e-mail duplicado', async () => {
       await request(app.getHttpServer())
-        .post('/users')
+        .post('/users/register') // 💡 Corrigido com /register
         .send(mockUser)
         .expect(HttpStatus.BAD_REQUEST);
     });
