@@ -1,14 +1,14 @@
-import axios from 'axios';
+import axios from "axios";
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000', 
+  baseURL: "http://localhost:3000",
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('@CInDatabase:token');
+  const token = localStorage.getItem("@CInDatabase:token");
   if (token && config.headers) {
     config.headers.Authorization = `Bearer ${token}`;
   }

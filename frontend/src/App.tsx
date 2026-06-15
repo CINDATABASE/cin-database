@@ -1,11 +1,8 @@
-import AuthPage from './features/auth/AuthPage';
+import React from "react";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
-  return (
-    <>
-      <AuthPage />
-    </>
-  );
+  return <AppRoutes />;
 }
 
 export default App;
