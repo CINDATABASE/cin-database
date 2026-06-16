@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { X, FolderPlus } from "lucide-react";
 import api from "../services/api";
 import "./Modals.css";

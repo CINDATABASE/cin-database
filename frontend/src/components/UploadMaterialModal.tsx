@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { X, Upload, FileText, CheckCircle2 } from "lucide-react";
 import api from "../services/api";
 import "./Modals.css";

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { ArrowLeft, Star, MessageSquare, Filter } from "lucide-react";
 import api from "../services/api";
 import "./ViewReviews.css";
