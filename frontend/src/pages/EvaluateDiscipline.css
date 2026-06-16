@@ -1,0 +1,209 @@
+.evaluateContainer {
+  padding: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+.evaluateHeader {
+  margin-bottom: 24px;
+}
+
+.evaluateBackButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+}
+
+.evaluateCard {
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 36px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.evaluateTitle {
+  font-size: 26px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+}
+
+.evaluateSubtitle {
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0 0 32px 0;
+}
+
+.evaluateForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.evaluateInputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.evaluateLabel {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.evaluateSelect {
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  outline: none;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.evaluateRatingSection {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.evaluateRatingGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 250px;
+}
+
+.evaluateRatingDesc {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+.evaluateStarRow {
+  display: flex;
+  gap: 6px;
+}
+
+.evaluateStarButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.evaluateTextareaWrapper {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+
+.evaluateTextareaIcon {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  color: #94a3b8;
+}
+
+.evaluateTextarea {
+  width: 100%;
+  height: 120px;
+  padding: 12px 12px 12px 42px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  outline: none;
+  resize: none;
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
+.evaluateSubmitButton {
+  background-color: #9c1c1c;
+  color: #ffffff;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 10px;
+}
+
+.evaluateSubmitButton:hover {
+  background-color: #7a1414;
+}
+
+.evaluateSubmitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.evaluateErrorAlert {
+  background-color: #ffebe9;
+  color: #9c1c1c;
+  border: 1px solid rgba(156, 28, 28, 0.15);
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.evaluateSuccessAlert {
+  background-color: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid rgba(22, 163, 74, 0.15);
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.evaluateResetSuccessBtn {
+  background: none;
+  border: none;
+  color: #16a34a;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .evaluateContainer {
+    padding: 20px 15px;
+  }
+  .evaluateCard {
+    padding: 24px 20px;
+  }
+  .evaluateRatingSection {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .evaluateTitle {
+    font-size: 22px;
+  }
+}

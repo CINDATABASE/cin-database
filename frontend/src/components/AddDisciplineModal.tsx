@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { X, FolderPlus } from "lucide-react";
 import api from "../services/api";
+import "./Modals.css";
 
 interface AddDisciplineModalProps {
   isOpen: boolean;
@@ -24,7 +25,6 @@ export default function AddDisciplineModal({ isOpen, onClose, onSuccess }: AddDi
     setLoading(true);
 
     try {
-      // 💡 Payload atualizado: enviado sem o campo 'description'
       await api.post("/disciplines", {
         name,
         code: code.trim().toUpperCase(),
@@ -33,7 +33,6 @@ export default function AddDisciplineModal({ isOpen, onClose, onSuccess }: AddDi
 
       alert(`Disciplina "${name}" cadastrada com sucesso!`);
       
-      // Limpa o formulário
       setName("");
       setCode("");
       setProfessor("");
@@ -53,58 +52,58 @@ export default function AddDisciplineModal({ isOpen, onClose, onSuccess }: AddDi
   };
 
   return (
-    <div style={styles.overlay}>
-      <div style={styles.modalCard}>
-        <header style={styles.header}>
-          <div style={styles.headerTitleGroup}>
+    <div className="modalOverlay">
+      <div className="modalCard modalCardSmall">
+        <header className="modalHeader modalHeaderSmall">
+          <div className="modalHeaderTitleGroup">
             <FolderPlus size={22} color="#9c1c1c" />
-            <h2 style={styles.title}>Nova Disciplina</h2>
+            <h2 className="modalTitle modalTitleSmall">Nova Disciplina</h2>
           </div>
-          <button onClick={onClose} style={styles.closeButton}>
+          <button onClick={onClose} className="modalCloseButton">
             <X size={20} />
           </button>
         </header>
 
-        {error && <div style={styles.errorAlert}>{error}</div>}
+        {error && <div className="modalErrorAlert">{error}</div>}
 
-        <form onSubmit={handleSubmit} style={styles.form}>
-          <div style={styles.inputGroup}>
-            <label style={styles.label}>Nome da Cadeira</label>
+        <form onSubmit={handleSubmit} className="modalForm modalFormSmall">
+          <div className="modalInputGroup">
+            <label className="modalLabel">Nome da Cadeira</label>
             <input 
               type="text" 
               placeholder="Ex: Infraestrutura de Redes" 
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              style={styles.input}
+              className="modalInput"
             />
           </div>
 
-          <div style={styles.inputGroup}>
-            <label style={styles.label}>Código da Cadeira</label>
+          <div className="modalInputGroup">
+            <label className="modalLabel">Código da Cadeira</label>
             <input 
               type="text" 
               placeholder="Ex: IF678" 
               value={code}
               onChange={(e) => setCode(e.target.value)}
               required
-              style={styles.input}
+              className="modalInput"
             />
           </div>
 
-          <div style={styles.inputGroup}>
-            <label style={styles.label}>Professor Titular</label>
+          <div className="modalInputGroup">
+            <label className="modalLabel">Professor Titular</label>
             <input 
               type="text" 
               placeholder="Ex: Patricia Tedesco" 
               value={professor}
               onChange={(e) => setProfessor(e.target.value)}
               required
-              style={styles.input}
+              className="modalInput"
             />
           </div>
 
-          <button type="submit" disabled={loading} style={styles.submitButton}>
+          <button type="submit" disabled={loading} className="modalSubmitButton">
             {loading ? "Salvando..." : "Cadastrar Disciplina"}
           </button>
         </form>
@@ -112,95 +111,3 @@ export default function AddDisciplineModal({ isOpen, onClose, onSuccess }: AddDi
     </div>
   );
 }
-
-const styles: Record<string, React.CSSProperties> = {
-  overlay: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(15, 23, 42, 0.6)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 1010,
-    backdropFilter: "blur(4px)",
-  },
-  modalCard: {
-    backgroundColor: "#ffffff",
-    borderRadius: "12px",
-    width: "100%",
-    maxWidth: "420px",
-    padding: "30px",
-    boxSizing: "border-box",
-    boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
-  },
-  header: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: "20px",
-  },
-  headerTitleGroup: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-  },
-  title: {
-    fontSize: "18px",
-    fontWeight: "700",
-    color: "#0f172a",
-    margin: 0,
-  },
-  closeButton: {
-    background: "none",
-    border: "none",
-    cursor: "pointer",
-    color: "#64748b",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "14px",
-  },
-  inputGroup: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "6px",
-  },
-  label: {
-    fontSize: "14px",
-    fontWeight: "600",
-    color: "#0f172a",
-  },
-  input: {
-    padding: "10px 12px",
-    fontSize: "14px",
-    borderRadius: "6px",
-    border: "1px solid #e2e8f0",
-    outline: "none",
-    fontFamily: "inherit",
-  },
-  submitButton: {
-    backgroundColor: "#9c1c1c",
-    color: "#ffffff",
-    padding: "12px",
-    border: "none",
-    borderRadius: "6px",
-    fontSize: "14px",
-    fontWeight: "600",
-    cursor: "pointer",
-    marginTop: "10px",
-  },
-  errorAlert: {
-    backgroundColor: "#ffebe9",
-    color: "#9c1c1c",
-    padding: "10px",
-    borderRadius: "6px",
-    fontSize: "13px",
-    marginBottom: "14px",
-    textAlign: "center",
-    fontWeight: "500",
-  },
-};

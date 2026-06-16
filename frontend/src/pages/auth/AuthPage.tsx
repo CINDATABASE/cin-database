@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Mail, Lock, LogIn, UserPlus, Eye, EyeOff } from "lucide-react";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
+import "./Auth.css";
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState<boolean>(true);
@@ -73,52 +74,52 @@ export default function AuthPage() {
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.card}>
-        <div style={styles.header}>
-          <div style={styles.logoPlaceholder}>CIn</div>
-          <h2 style={styles.title}>DataBase</h2>
-          <p style={styles.subtitle}>
+    <div className="authContainer">
+      <div className="authCard">
+        <div className="authHeader">
+          <div className="authLogoPlaceholder">CIn</div>
+          <h2 className="authTitle">DataBase</h2>
+          <p className="authSubtitle">
             {isLogin
               ? "Faça login com sua conta institucional"
               : "Crie sua conta institucional"}
           </p>
         </div>
 
-        {error && <div style={styles.errorAlert}>{error}</div>}
+        {error && <div className="authErrorAlert">{error}</div>}
 
-        <form onSubmit={handleSubmit} style={styles.form}>
-          <div style={styles.inputGroup}>
-            <label style={styles.label}>E-mail do CIn</label>
-            <div style={styles.inputWrapper}>
-              <Mail size={20} style={styles.inputIcon} />
+        <form onSubmit={handleSubmit} className="authForm">
+          <div className="authInputGroup">
+            <label className="authLabel">E-mail do CIn</label>
+            <div className="authInputWrapper">
+              <Mail size={20} className="authInputIcon" />
               <input
                 type="email"
                 placeholder="usuario@cin.ufpe.br"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                style={styles.input}
+                className="authInput"
               />
             </div>
           </div>
 
-          <div style={styles.inputGroup}>
-            <label style={styles.label}>Senha</label>
-            <div style={styles.inputWrapper}>
-              <Lock size={20} style={styles.inputIcon} />
+          <div className="authInputGroup">
+            <label className="authLabel">Senha</label>
+            <div className="authInputWrapper">
+              <Lock size={20} className="authInputIcon" />
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                style={styles.input}
+                className="authInput"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                style={styles.eyeButton}
+                className="authEyeButton"
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
@@ -126,23 +127,23 @@ export default function AuthPage() {
           </div>
 
           {!isLogin && (
-            <div style={styles.inputGroup}>
-              <label style={styles.label}>Confirmar Senha</label>
-              <div style={styles.inputWrapper}>
-                <Lock size={20} style={styles.inputIcon} />
+            <div className="authInputGroup">
+              <label className="authLabel">Confirmar Senha</label>
+              <div className="authInputWrapper">
+                <Lock size={20} className="authInputIcon" />
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="••••••••"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
-                  style={styles.input}
+                  className="authInput"
                 />
               </div>
             </div>
           )}
 
-          <button type="submit" disabled={loading} style={styles.submitButton}>
+          <button type="submit" disabled={loading} className="authSubmitButton">
             {loading ? (
               "Carregando..."
             ) : isLogin ? (
@@ -157,13 +158,13 @@ export default function AuthPage() {
           </button>
         </form>
 
-        <div style={styles.toggleContainer}>
+        <div className="authToggleContainer">
           <button
             onClick={() => {
               setIsLogin(!isLogin);
               setError(null);
             }}
-            style={styles.toggleButton}
+            className="authToggleButton"
           >
             {isLogin
               ? "Não tem uma conta? Cadastre-se"
@@ -174,151 +175,3 @@ export default function AuthPage() {
     </div>
   );
 }
-
-const COLORS = {
-  cinRed: "#9c1c1c",
-  cinRedHover: "#7a1414",
-  white: "#ffffff",
-  grayBg: "#f4f5f7",
-  textDark: "#1a1a1a",
-  textMuted: "#666666",
-  border: "#e1e4e8",
-};
-
-const styles: { [key: string]: React.CSSProperties } = {
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    minHeight: "100vh",
-    backgroundColor: COLORS.grayBg,
-    fontFamily: "Segoe UI, Roboto, Helvetica Neue, sans-serif",
-    padding: "20px",
-  },
-  card: {
-    backgroundColor: COLORS.white,
-    borderRadius: "12px",
-    boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
-    width: "100%",
-    maxWidth: "420px",
-    padding: "40px 30px",
-    boxSizing: "border-box",
-  },
-  header: {
-    textAlign: "center",
-    marginBottom: "30px",
-  },
-  logoPlaceholder: {
-    backgroundColor: COLORS.cinRed,
-    color: COLORS.white,
-    width: "60px",
-    height: "60px",
-    borderRadius: "12px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "20px",
-    fontWeight: "bold",
-    margin: "0 auto 12px auto",
-    letterSpacing: "1px",
-  },
-  title: {
-    fontSize: "26px",
-    fontWeight: "700",
-    color: COLORS.textDark,
-    margin: "0 0 5px 0",
-  },
-  subtitle: {
-    fontSize: "14px",
-    color: COLORS.textMuted,
-    margin: 0,
-  },
-  errorAlert: {
-    backgroundColor: "#ffebe9",
-    color: COLORS.cinRed,
-    border: `1px solid rgba(156, 28, 28, 0.2)`,
-    padding: "12px",
-    borderRadius: "6px",
-    fontSize: "14px",
-    marginBottom: "20px",
-    textAlign: "center",
-    fontWeight: "500",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "20px",
-  },
-  inputGroup: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "6px",
-  },
-  label: {
-    fontSize: "14px",
-    fontWeight: "600",
-    color: COLORS.textDark,
-  },
-  inputWrapper: {
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-  },
-  inputIcon: {
-    position: "absolute",
-    left: "12px",
-    color: COLORS.textMuted,
-    pointerEvents: "none",
-  },
-  input: {
-    width: "100%",
-    padding: "12px 12px 12px 40px",
-    fontSize: "15px",
-    borderRadius: "6px",
-    border: `1px solid ${COLORS.border}`,
-    outline: "none",
-    boxSizing: "border-box",
-    transition: "border-color 0.2s",
-  },
-  eyeButton: {
-    position: "absolute",
-    right: "12px",
-    background: "none",
-    border: "none",
-    color: COLORS.textMuted,
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    padding: 0,
-  },
-  submitButton: {
-    backgroundColor: COLORS.cinRed,
-    color: COLORS.white,
-    padding: "14px",
-    border: "none",
-    borderRadius: "6px",
-    fontSize: "16px",
-    fontWeight: "600",
-    cursor: "pointer",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    transition: "background-color 0.2s",
-    marginTop: "10px",
-  },
-  toggleContainer: {
-    textAlign: "center",
-    marginTop: "25px",
-    borderTop: `1px solid ${COLORS.border}`,
-    paddingTop: "20px",
-  },
-  toggleButton: {
-    background: "none",
-    border: "none",
-    color: COLORS.cinRed,
-    fontSize: "14px",
-    fontWeight: "500",
-    cursor: "pointer",
-    textDecoration: "underline",
-  },
-};

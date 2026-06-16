@@ -1,0 +1,217 @@
+/* Modals.css */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 23, 42, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.modalCard {
+  background-color: #ffffff;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+  box-sizing: border-box;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modalCardSmall {
+  max-width: 420px;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.modalHeaderSmall {
+  margin-bottom: 20px;
+}
+
+.modalHeaderTitleGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modalTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.modalTitleSmall {
+  font-size: 18px;
+}
+
+.modalCloseButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #64748b;
+  padding: 0;
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modalFormSmall {
+  gap: 14px;
+}
+
+.modalInputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modalRow {
+  display: flex;
+  gap: 12px;
+}
+
+.modalLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.modalInput {
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: inherit;
+  width: 100%;
+}
+
+.modalSelect {
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  outline: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.modalFileDropzone {
+  border: 2px dashed #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  background-color: #f8fafc;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.modalFileLabel {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+.modalDropzonePlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.modalDropzoneText {
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+}
+
+.modalDropzoneSubtext {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.modalFileSelectedInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.modalFileName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modalFileSize {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.modalSubmitButton {
+  background-color: #9c1c1c;
+  color: #ffffff;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.modalSubmitButton:hover {
+  background-color: #7a1414;
+}
+
+.modalSubmitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.modalErrorAlert {
+  background-color: #ffebe9;
+  color: #9c1c1c;
+  border: 1px solid rgba(156, 28, 28, 0.2);
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 14px;
+  text-align: center;
+  font-weight: 500;
+}
+
+@media (max-width: 480px) {
+  .modalCard {
+    padding: 24px 20px;
+  }
+  .modalRow {
+    flex-direction: column;
+  }
+}
