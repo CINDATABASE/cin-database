@@ -1,0 +1,396 @@
+:root {
+  --cin-red: #9c1c1c;
+  --cin-red-hover: #7a1414;
+  --white: #ffffff;
+  --gray-bg: #f8fafc;
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+}
+
+.dashboardContainer {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--gray-bg);
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+.sidebar {
+  width: 260px;
+  background-color: var(--white);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 30px 20px;
+  box-sizing: border-box;
+}
+
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.miniLogo {
+  background-color: var(--cin-red);
+  color: var(--white);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.sidebarBrand {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebarButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.activeSidebarButton {
+  background-color: #fef2f2;
+  color: var(--cin-red);
+  font-weight: 600;
+}
+
+.activeAdminSidebarButton {
+  background-color: #f0fdf4;
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.logoutButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  color: #dc2626;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  margin-top: auto;
+  width: 100%;
+}
+
+.mainContent {
+  padding: 40px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.contentHeader {
+  margin-bottom: 30px;
+}
+
+.welcomeTitle {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 6px 0;
+}
+
+.welcomeSubtitle {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.filterSection {
+  background-color: var(--white);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  border: 1px solid var(--border);
+  margin-bottom: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.searchBarWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 16px;
+  color: var(--text-muted);
+}
+
+.searchInput {
+  width: 100%;
+  padding: 14px 14px 14px 48px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.filterControlsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.dropdownGroup {
+  display: flex;
+  gap: 12px;
+}
+
+.selectWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.selectIcon {
+  position: absolute;
+  left: 12px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.selectInput {
+  padding: 10px 16px 10px 36px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background-color: var(--white);
+  outline: none;
+  color: var(--text-dark);
+  cursor: pointer;
+}
+
+.typeTabs {
+  display: flex;
+  background-color: #f1f5f9;
+  padding: 4px;
+  border-radius: 8px;
+  gap: 4px;
+}
+
+.tabButton {
+  display: flex;
+  align-items: center;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  background: none;
+  border-radius: 6px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.activeTabButton {
+  background-color: var(--white);
+  color: var(--text-dark);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.materialCard {
+  background-color: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.typeBadge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.provaBadge { background-color: #fee2e2; color: #9c1c1c; }
+.listaBadge { background-color: #e0f2fe; color: #0369a1; }
+.videoBadge { background-color: #fef3c7; color: #b45309; }
+
+.cardFavoriteButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin: 0 0 8px 0;
+}
+
+.cardDescription {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0 0 20px 0;
+  line-height: 1.5;
+}
+
+.cardFooter {
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.metaItem {
+  font-size: 13px;
+  color: var(--text-dark);
+}
+
+.downloadCardButton {
+  background-color: #f1f5f9;
+  color: var(--text-dark);
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.approveCardButton {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centeredState {
+  text-align: center;
+  padding: 60px;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+/* Responsividade Mobile */
+@media (max-width: 768px) {
+  .dashboardContainer {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 20px 15px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebarHeader {
+    margin-bottom: 20px;
+  }
+
+  .sidebarNav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .sidebarButton, .logoutButton {
+    width: auto;
+    flex: 1;
+    min-width: 140px;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .logoutButton {
+    margin-top: 10px;
+  }
+
+  .mainContent {
+    padding: 20px 15px;
+  }
+
+  .filterControlsRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dropdownGroup {
+    flex-direction: column;
+  }
+
+  .selectWrapper, .selectInput {
+    width: 100%;
+  }
+
+  .typeTabs {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 4px;
+  }
+
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+}

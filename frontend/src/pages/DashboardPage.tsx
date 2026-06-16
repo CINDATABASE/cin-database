@@ -21,8 +21,8 @@ import AddDisciplineModal from "../components/AddDisciplineModal";
 import api from "../services/api";
 import UploadMaterialModal from "../components/UploadMaterialModal";
 import EvaluateDisciplinePage from "./EvaluateDisciplinePage";
-import ViewReviewsPage from "./ViewReviewsPage"; // 💡 Importando a nova página de listagem
-
+import ViewReviewsPage from "./ViewReviewsPage";
+import "./Dashboard.css";
 interface Material {
   _id: string;
   title: string;
@@ -222,24 +222,16 @@ export default function DashboardPage() {
   });
 
   return (
-    <div style={styles.dashboardContainer}>
-      <aside style={styles.sidebar}>
-        <div style={styles.sidebarHeader}>
-          <div style={styles.miniLogo}>CIn</div>
-          <span style={styles.sidebarBrand}>DataBase</span>
+    <div className="dashboardContainer">
+      <aside className="sidebar">
+        <div className="sidebarHeader">
+          <div className="miniLogo">CIn</div>
+          <span className="sidebarBrand">DataBase</span>
         </div>
 
-        <nav style={styles.sidebarNav}>
+        <nav className="sidebarNav">
           <button
-            style={{
-              ...styles.sidebarButton,
-              ...(!isAdminView &&
-              !showOnlyFavorites &&
-              !isEvaluatingView &&
-              !isViewingReviews
-                ? styles.activeSidebarButton
-                : {}),
-            }}
+            className={`sidebarButton ${!isAdminView && !showOnlyFavorites && !isEvaluatingView && !isViewingReviews ? "activeSidebarButton" : ""}`}
             onClick={() => {
               setShowOnlyFavorites(false);
               setIsEvaluatingView(false);
@@ -252,10 +244,7 @@ export default function DashboardPage() {
           </button>
 
           <button
-            style={{
-              ...styles.sidebarButton,
-              ...(isEvaluatingView ? styles.activeSidebarButton : {}),
-            }}
+            className={`sidebarButton ${isEvaluatingView ? "activeSidebarButton" : ""}`}
             onClick={() => {
               setIsAdminView(false);
               setShowOnlyFavorites(false);
@@ -267,12 +256,8 @@ export default function DashboardPage() {
             <span>Avaliar Cadeira</span>
           </button>
 
-          {/* 💡 NOVO BOTÃO DA SIDEBAR: VER AVALIAÇÕES */}
           <button
-            style={{
-              ...styles.sidebarButton,
-              ...(isViewingReviews ? styles.activeSidebarButton : {}),
-            }}
+            className={`sidebarButton ${isViewingReviews ? "activeSidebarButton" : ""}`}
             onClick={() => {
               setIsAdminView(false);
               setShowOnlyFavorites(false);
@@ -285,10 +270,7 @@ export default function DashboardPage() {
           </button>
 
           <button
-            style={{
-              ...styles.sidebarButton,
-              ...(showOnlyFavorites ? styles.activeSidebarButton : {}),
-            }}
+            className={`sidebarButton ${showOnlyFavorites ? "activeSidebarButton" : ""}`}
             onClick={() => {
               setIsAdminView(false);
               setIsEvaluatingView(false);
@@ -301,7 +283,7 @@ export default function DashboardPage() {
           </button>
 
           <button
-            style={styles.sidebarButton}
+            className="sidebarButton"
             onClick={() => setIsUploadModalOpen(true)}
           >
             <PlusCircle size={20} />
@@ -309,7 +291,7 @@ export default function DashboardPage() {
           </button>
 
           <button
-            style={styles.sidebarButton}
+            className="sidebarButton"
             onClick={() => setIsAddDisciplineModalOpen(true)}
           >
             <FolderPlus size={20} />
@@ -318,10 +300,7 @@ export default function DashboardPage() {
 
           {userRole === "ADMIN" && (
             <button
-              style={{
-                ...styles.sidebarButton,
-                ...(isAdminView ? styles.activeAdminSidebarButton : {}),
-              }}
+              className={`sidebarButton ${isAdminView ? "activeAdminSidebarButton" : ""}`}
               onClick={() => handleToggleAdminView(true)}
             >
               <ShieldCheck size={20} />
@@ -330,29 +309,29 @@ export default function DashboardPage() {
           )}
         </nav>
 
-        <button style={styles.logoutButton} onClick={handleLogout}>
+        <button className="logoutButton" onClick={handleLogout}>
           <LogOut size={20} />
           <span>Sair da Conta</span>
         </button>
       </aside>
 
-      <main style={styles.mainContent}>
+      <main className="mainContent">
         {isEvaluatingView ? (
           <EvaluateDisciplinePage onBack={() => setIsEvaluatingView(false)} />
-        ) : isViewingReviews ? ( // 💡 RENDERIZA A NOVA PÁGINA SE O ESTADO FOR TRUE
+        ) : isViewingReviews ? (
           <ViewReviewsPage onBack={() => setIsViewingReviews(false)} />
         ) : (
           <>
-            <header style={styles.contentHeader}>
+            <header className="contentHeader">
               <div>
-                <h1 style={styles.welcomeTitle}>
+                <h1 className="welcomeTitle">
                   {isAdminView
                     ? "Painel de Moderação"
                     : showOnlyFavorites
                       ? "Meus Favoritos"
                       : "Repositório Acadêmico"}
                 </h1>
-                <p style={styles.welcomeSubtitle}>
+                <p className="welcomeSubtitle">
                   {isAdminView
                     ? "Aprovações pendentes antes de disponibilizar os arquivos para a comunidade do CIn."
                     : showOnlyFavorites
@@ -363,26 +342,26 @@ export default function DashboardPage() {
             </header>
 
             {!isAdminView && (
-              <section style={styles.filterSection}>
-                <div style={styles.searchBarWrapper}>
-                  <Search size={20} style={styles.searchIcon} />
+              <section className="filterSection">
+                <div className="searchBarWrapper">
+                  <Search size={20} className="searchIcon" />
                   <input
                     type="text"
                     placeholder="Pesquise por palavras-chave (ex: EE1, ponteiros, indução)..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    style={styles.searchInput}
+                    className="searchInput"
                   />
                 </div>
 
-                <div style={styles.filterControlsRow}>
-                  <div style={styles.dropdownGroup}>
-                    <div style={styles.selectWrapper}>
-                      <Filter size={16} style={styles.selectIcon} />
+                <div className="filterControlsRow">
+                  <div className="dropdownGroup">
+                    <div className="selectWrapper">
+                      <Filter size={16} className="selectIcon" />
                       <select
                         value={selectedDiscipline}
                         onChange={(e) => setSelectedDiscipline(e.target.value)}
-                        style={styles.selectInput}
+                        className="selectInput"
                       >
                         <option value="TODAS">TODAS AS CADEIRAS</option>
                         {disciplines.map((disc) => (
@@ -393,12 +372,12 @@ export default function DashboardPage() {
                       </select>
                     </div>
 
-                    <div style={styles.selectWrapper}>
-                      <SlidersHorizontal size={16} style={styles.selectIcon} />
+                    <div className="selectWrapper">
+                      <SlidersHorizontal size={16} className="selectIcon" />
                       <select
                         value={selectedProfessor}
                         onChange={(e) => setSelectedProfessor(e.target.value)}
-                        style={styles.selectInput}
+                        className="selectInput"
                       >
                         <option value="TODOS">TODOS OS DOCENTES</option>
                         {professors.map((prof) => (
@@ -410,48 +389,28 @@ export default function DashboardPage() {
                     </div>
                   </div>
 
-                  <div style={styles.typeTabs}>
+                  <div className="typeTabs">
                     <button
                       onClick={() => setSelectedType("ALL")}
-                      style={{
-                        ...styles.tabButton,
-                        ...(selectedType === "ALL"
-                          ? styles.activeTabButton
-                          : {}),
-                      }}
+                      className={`tabButton ${selectedType === "ALL" ? "activeTabButton" : ""}`}
                     >
                       Todos
                     </button>
                     <button
                       onClick={() => setSelectedType("PROVA")}
-                      style={{
-                        ...styles.tabButton,
-                        ...(selectedType === "PROVA"
-                          ? styles.activeTabButton
-                          : {}),
-                      }}
+                      className={`tabButton ${selectedType === "PROVA" ? "activeTabButton" : ""}`}
                     >
                       <FileText size={16} style={{ marginRight: 4 }} /> Provas
                     </button>
                     <button
                       onClick={() => setSelectedType("LISTA")}
-                      style={{
-                        ...styles.tabButton,
-                        ...(selectedType === "LISTA"
-                          ? styles.activeTabButton
-                          : {}),
-                      }}
+                      className={`tabButton ${selectedType === "LISTA" ? "activeTabButton" : ""}`}
                     >
                       <FileText size={16} style={{ marginRight: 4 }} /> Listas
                     </button>
                     <button
                       onClick={() => setSelectedType("VIDEO")}
-                      style={{
-                        ...styles.tabButton,
-                        ...(selectedType === "VIDEO"
-                          ? styles.activeTabButton
-                          : {}),
-                      }}
+                      className={`tabButton ${selectedType === "VIDEO" ? "activeTabButton" : ""}`}
                     >
                       <Video size={16} style={{ marginRight: 4 }} />{" "}
                       Vídeos/Monitorias
@@ -462,11 +421,11 @@ export default function DashboardPage() {
             )}
 
             {loading ? (
-              <div style={styles.centeredState}>
+              <div className="centeredState">
                 Carregando banco de arquivos...
               </div>
             ) : filteredMaterials.length === 0 ? (
-              <div style={styles.centeredState}>
+              <div className="centeredState">
                 {isAdminView
                   ? "Tudo limpo! Nenhum material aguardando aprovação por enquanto."
                   : showOnlyFavorites
@@ -474,15 +433,12 @@ export default function DashboardPage() {
                     : "Nenhum material encontrado com os filtros selecionados."}
               </div>
             ) : (
-              <div style={styles.cardsGrid}>
+              <div className="cardsGrid">
                 {filteredMaterials.map((material) => (
-                  <div key={material._id} style={styles.materialCard}>
-                    <div style={styles.cardHeader}>
+                  <div key={material._id} className="materialCard">
+                    <div className="cardHeader">
                       <span
-                        style={{
-                          ...styles.typeBadge,
-                          ...styles[material.type.toLowerCase() + "Badge"],
-                        }}
+                        className={`typeBadge ${material.type.toLowerCase()}Badge`}
                       >
                         {material.type}
                       </span>
@@ -490,7 +446,7 @@ export default function DashboardPage() {
                       {!isAdminView && (
                         <button
                           onClick={() => toggleFavorite(material._id)}
-                          style={styles.cardFavoriteButton}
+                          className="cardFavoriteButton"
                         >
                           <Star
                             size={20}
@@ -509,14 +465,14 @@ export default function DashboardPage() {
                       )}
                     </div>
 
-                    <h3 style={styles.cardTitle}>{material.title}</h3>
-                    <p style={styles.cardDescription}>{material.description}</p>
+                    <h3 className="cardTitle">{material.title}</h3>
+                    <p className="cardDescription">{material.description}</p>
 
-                    <div style={styles.cardFooter}>
-                      <div style={styles.metaItem}>
+                    <div className="cardFooter">
+                      <div className="metaItem">
                         <strong>Cadeira:</strong> {material.disciplineName}
                       </div>
-                      <div style={styles.metaItem}>
+                      <div className="metaItem">
                         <strong>Docente:</strong> {material.professor}
                       </div>
                     </div>
@@ -524,7 +480,7 @@ export default function DashboardPage() {
                     {isAdminView ? (
                       <button
                         onClick={() => handleApproveMaterial(material._id)}
-                        style={styles.approveCardButton}
+                        className="approveCardButton"
                       >
                         <Check size={16} style={{ marginRight: 6 }} />
                         Aprovar e Publicar
@@ -535,7 +491,7 @@ export default function DashboardPage() {
                       >
                         <button
                           onClick={() => handleViewMaterial(material._id)}
-                          style={{ ...styles.downloadCardButton, flex: 1 }}
+                          className="downloadCardButton"
                         >
                           Visualizar
                         </button>
@@ -547,11 +503,8 @@ export default function DashboardPage() {
                               material.filename,
                             )
                           }
-                          style={{
-                            ...styles.downloadCardButton,
-                            flex: 1,
-                            backgroundColor: "#e2e8f0",
-                          }}
+                          className="downloadCardButton"
+                          style={{ backgroundColor: "#e2e8f0" }}
                         >
                           <Download size={14} style={{ marginRight: 4 }} />
                           Baixar
@@ -581,297 +534,4 @@ export default function DashboardPage() {
   );
 }
 
-const COLORS = {
-  cinRed: "#9c1c1c",
-  cinRedHover: "#7a1414",
-  white: "#ffffff",
-  grayBg: "#f8fafc",
-  textDark: "#0f172a",
-  textMuted: "#64748b",
-  border: "#e2e8f0",
-};
 
-const styles: Record<string, React.CSSProperties> = {
-  dashboardContainer: {
-    display: "flex",
-    minHeight: "100vh",
-    backgroundColor: COLORS.grayBg,
-    fontFamily: "Segoe UI, Roboto, sans-serif",
-  },
-  sidebar: {
-    width: "260px",
-    backgroundColor: COLORS.white,
-    borderRight: `1px solid ${COLORS.border}`,
-    display: "flex",
-    flexDirection: "column",
-    padding: "30px 20px",
-    boxSizing: "border-box",
-  },
-  sidebarHeader: {
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-    marginBottom: "40px",
-  },
-  miniLogo: {
-    backgroundColor: COLORS.cinRed,
-    color: COLORS.white,
-    padding: "6px 10px",
-    borderRadius: "8px",
-    fontWeight: "bold",
-    fontSize: "14px",
-  },
-  sidebarBrand: {
-    fontSize: "20px",
-    fontWeight: "700",
-    color: COLORS.textDark,
-  },
-  sidebarNav: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "8px",
-  },
-  sidebarButton: {
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-    padding: "12px 16px",
-    background: "none",
-    border: "none",
-    borderRadius: "8px",
-    color: COLORS.textMuted,
-    fontSize: "15px",
-    fontWeight: "500",
-    cursor: "pointer",
-    textAlign: "left",
-    transition: "all 0.2s",
-  },
-  activeSidebarButton: {
-    backgroundColor: "#fef2f2",
-    color: COLORS.cinRed,
-    fontWeight: "600",
-  },
-  activeAdminSidebarButton: {
-    backgroundColor: "#f0fdf4",
-    color: "#16a34a",
-    fontWeight: "600",
-  },
-  logoutButton: {
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-    padding: "12px 16px",
-    background: "none",
-    border: "none",
-    borderRadius: "8px",
-    color: "#dc2626",
-    fontSize: "15px",
-    fontWeight: "500",
-    cursor: "pointer",
-    textAlign: "left",
-    marginTop: "auto",
-  },
-  mainContent: {
-    padding: "40px",
-    overflowY: "auto",
-    boxSizing: "border-box",
-    width: "100%",
-  },
-  contentHeader: {
-    marginBottom: "30px",
-  },
-  welcomeTitle: {
-    fontSize: "28px",
-    fontWeight: "700",
-    color: COLORS.textDark,
-    margin: "0 0 6px 0",
-  },
-  welcomeSubtitle: {
-    fontSize: "15px",
-    color: COLORS.textMuted,
-    margin: 0,
-  },
-  filterSection: {
-    backgroundColor: COLORS.white,
-    borderRadius: "12px",
-    padding: "20px",
-    boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
-    border: `1px solid ${COLORS.border}`,
-    marginBottom: "35px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "16px",
-  },
-  searchBarWrapper: {
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-  },
-  searchIcon: {
-    position: "absolute",
-    left: "16px",
-    color: COLORS.textMuted,
-  },
-  searchInput: {
-    width: "100%",
-    padding: "14px 14px 14px 48px",
-    fontSize: "15px",
-    borderRadius: "8px",
-    border: `1px solid ${COLORS.border}`,
-    outline: "none",
-    boxSizing: "border-box",
-  },
-  filterControlsRow: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexWrap: "wrap",
-    gap: "16px",
-  },
-  dropdownGroup: {
-    display: "flex",
-    gap: "12px",
-  },
-  selectWrapper: {
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-  },
-  selectIcon: {
-    position: "absolute",
-    left: "12px",
-    color: COLORS.textMuted,
-    pointerEvents: "none",
-  },
-  selectInput: {
-    padding: "10px 16px 10px 36px",
-    fontSize: "14px",
-    borderRadius: "6px",
-    border: `1px solid ${COLORS.border}`,
-    backgroundColor: COLORS.white,
-    outline: "none",
-    color: COLORS.textDark,
-    cursor: "pointer",
-  },
-  typeTabs: {
-    display: "flex",
-    backgroundColor: "#f1f5f9",
-    padding: "4px",
-    borderRadius: "8px",
-    gap: "4px",
-  },
-  tabButton: {
-    display: "flex",
-    alignItems: "center",
-    padding: "8px 14px",
-    fontSize: "14px",
-    fontWeight: "500",
-    border: "none",
-    background: "none",
-    borderRadius: "6px",
-    color: COLORS.textMuted,
-    cursor: "pointer",
-    transition: "all 0.2s",
-  },
-  activeTabButton: {
-    backgroundColor: COLORS.white,
-    color: COLORS.textDark,
-    boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
-  },
-  cardsGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-    gap: "24px",
-  },
-  materialCard: {
-    backgroundColor: COLORS.white,
-    borderRadius: "12px",
-    border: `1px solid ${COLORS.border}`,
-    padding: "24px",
-    boxShadow: "0 1px 3px rgba(0,0,0,0.02)",
-    display: "flex",
-    flexDirection: "column",
-    transition: "transform 0.2s, boxShadow 0.2s",
-  },
-  cardHeader: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: "14px",
-  },
-  typeBadge: {
-    padding: "4px 10px",
-    borderRadius: "20px",
-    fontSize: "12px",
-    fontWeight: "600",
-  },
-  provaBadge: { backgroundColor: "#fee2e2", color: "#9c1c1c" },
-  listaBadge: { backgroundColor: "#e0f2fe", color: "#0369a1" },
-  videoBadge: { backgroundColor: "#fef3c7", color: "#b45309" },
-  cardFavoriteButton: {
-    background: "none",
-    border: "none",
-    cursor: "pointer",
-    padding: 0,
-  },
-  cardTitle: {
-    fontSize: "18px",
-    fontWeight: "600",
-    color: COLORS.textDark,
-    margin: "0 0 8px 0",
-  },
-  cardDescription: {
-    fontSize: "14px",
-    color: COLORS.textMuted,
-    margin: "0 0 20px 0",
-    lineHeight: "1.5",
-  },
-  cardFooter: {
-    borderTop: `1px solid ${COLORS.border}`,
-    paddingTop: "14px",
-    marginBottom: "16px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "6px",
-  },
-  metaItem: {
-    fontSize: "13px",
-    color: COLORS.textDark,
-  },
-  downloadCardButton: {
-    backgroundColor: "#f1f5f9",
-    color: COLORS.textDark,
-    border: "none",
-    padding: "10px",
-    borderRadius: "6px",
-    fontWeight: "600",
-    fontSize: "14px",
-    cursor: "pointer",
-    transition: "background-color 0.2s",
-    textAlign: "center",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  approveCardButton: {
-    backgroundColor: "#e8f5e9",
-    color: "#2e7d32",
-    border: "none",
-    padding: "10px",
-    borderRadius: "6px",
-    fontWeight: "600",
-    fontSize: "14px",
-    cursor: "pointer",
-    transition: "background-color 0.2s",
-    textAlign: "center",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  centeredState: {
-    textAlign: "center",
-    padding: "60px",
-    color: COLORS.textMuted,
-    fontSize: "16px",
-  },
-};
