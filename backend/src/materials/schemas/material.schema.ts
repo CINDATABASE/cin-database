@@ -29,6 +29,12 @@ export class Material {
   @Prop({ required: true })
   path: string;
 
+  @Prop({ required: false })
+  fileData?: string;
+
+  @Prop({ required: false })
+  mimeType?: string;
+
   @Prop({ default: false })
   isApproved: boolean;
 }

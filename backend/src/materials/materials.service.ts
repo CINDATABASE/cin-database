@@ -35,8 +35,10 @@ export class MaterialsService {
       disciplineName,
       professor,
       type: normalizedType,
-      filename: file.filename,
-      path: file.path,
+      filename: file.originalname || file.filename,
+      path: file.path || 'database',
+      fileData: file.buffer ? file.buffer.toString('base64') : undefined,
+      mimeType: file.mimetype,
       isApproved: false,
     });
 

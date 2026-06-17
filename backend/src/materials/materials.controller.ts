@@ -31,15 +31,6 @@ export class MaterialsController {
   @Post('upload')
   @UseInterceptors(
     FileInterceptor('file', {
-      storage: diskStorage({
-        destination: './uploads',
-        filename: (req, file, callback) => {
-          const uniqueSuffix =
-            Date.now() + '-' + Math.round(Math.random() * 1e9);
-          const ext = extname(file.originalname);
-          callback(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
-        },
-      }),
       fileFilter: (req, file, callback) => {
         if (
           file.mimetype === 'application/pdf' ||
@@ -97,12 +88,33 @@ export class MaterialsController {
   ): Promise<void> {
     const material = await this.materialsService.findById(id);
 
+    if (material.fileData) {
+      const fileBuffer = Buffer.from(material.fileData, 'base64');
+      res.set({
+        'Content-Type': material.mimeType || 'application/octet-stream',
+        'Content-Disposition': `attachment; filename="${material.filename}"`,
+      });
+      res.send(fileBuffer);
+      return;
+    }
+
     return res.download(material.path, material.filename);
   }
 
   @Get('view/:id')
   async viewFile(@Param('id') id: string, @Res() res: Response): Promise<void> {
     const material = await this.materialsService.findById(id);
+
+    if (material.fileData) {
+      const fileBuffer = Buffer.from(material.fileData, 'base64');
+      res.set({
+        'Content-Type': material.mimeType || 'application/octet-stream',
+        'Content-Disposition': `inline; filename="${material.filename}"`,
+      });
+      res.send(fileBuffer);
+      return;
+    }
+
     const absolutePath = path.resolve(material.path);
     return res.sendFile(absolutePath);
   }
